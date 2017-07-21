@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 500px;
+            height: 320px;
+            float: left;
+            position: absolute;
+            top: 0;
+            /*//overflow: hidden;*/
+
+        }
+
+        .one {
+            left: 100px;
+
+        }
+
+        .two {
+            left: 150px;
+
+        }
+
+        .three {
+            left: 200px;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- <img class="one" src="image/0.jpg">
+ <img class="two" src="image/1.jpg">
+ <img class="three" src="image/2.jpg">
+ <img class="four" src="image/3.jpg">
+ <img class="five" src="image/4.jpg">
+ <img class="six" src="image/5.jpg">-->
+
+</body>
+<script src="jquery-3.2.1.js"></script>
+<script src="jquery-3.2.1.min.js"></script>
+<script src="app.js"></script>
+<script>
+    /*
+     * 作业
+     * 1.手风琴 基本样式 苗老师发的 图片手风琴
+     * 2.文字的手风琴  添加互斥效果 展开 文字添加fadeIn效果 合拢添加fadeOut
+     * */
+    /* var one=$(".one");
+     var two=$(".two");
+     var three=$(".three");
+     var four=$(".four");
+     var five=$(".five");
+     var six=$("six");
+     one.click(function () {
+     $(this).animate({"width":"500px","float":"left"},"fast");
+     $(this).siblings({"width":"50px","float":"right"});
+     // three.animate({"width":"50px","float":"right"})
+     })*/
+    //封装一个类
+    Acoordion.prototype.showAccordion = function () {
+        var container = $("<ul></ul>");
+        container.css("list-style", "none");
+        var self = this;
+        this.datas.forEach(function (image) {
+
+            var item = $("<li></li>")
+            item.css({
+                "width": "100px",
+                "height": "200px",
+                "float": "left",
+                "background": "url(" + imgage + ") center"
+            })
+            container.append(item);
+            //给每一个li都添加事件
+            self.action(item);
+
+        });
+        this.superView.append(container);
+    };
+
+    Acoordion.prototype.action = function () {
+        item.hover(function () {
+            $(this).animate({"width":"300px"},500,"swing");
+            $("ul>li").not($(this)).stop().animate({"width":"300px"},500,"swing");
+        },function () {
+            $(this).css("width","60px");
+        })
+    };
+
+
+
+    function Acoordion(superView, datas) {
+        this.superView = superView;
+        this.datas = dates;
+        this.showAccordion();
+
+    }
+    ;
+    //显示手风琴
+    //显示在哪里？容器
+    //图片数据
+
+    var container = $("<ul></ul>");
+    var list = [
+        "image/0.jpg",
+        "image/1.jpg",
+        "image/2.jpg",
+        "image/3.jpg",
+        "image/4.jpg",
+        "image/5.jpg"
+
+    ];
+    list.forEach(function (image) {
+        var li = $("<li></li>");
+        li.css({
+            "width": "100px",
+            "height": "200px",
+            "float": "left",
+            "background": "url(" + image + ") center"
+        });
+        container.append(li);
+
+        li.hover(function () {
+            $(this).css("width", "300px");
+            console.log(this);
+            $(this).siblings("width", "60px")
+        }, function () {
+            li.css("width", "100px");
+        });
+    });
+
+
+    $(document.body).append(container);
+</script>
+</html>
